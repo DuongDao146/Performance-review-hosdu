@@ -10,13 +10,14 @@ body, html {
 
 .image-container {
     position: relative;
-    width: 85vw; /* Width of the image container */
-    height: 85vh; /* Height of the image container */
-    max-width: 100%; /* Limit to viewport width */
-    max-height: 100%; /* Limit to viewport height */
-    overflow: hidden; /* No overflow */
-    background: none; /* No background or gradient */
-    transition: transform 0.3s ease; /* Smooth transition */
+    width: 65vw; /* Reduce the width to 70% of the viewport width */
+    height: auto; /* Automatically adjust the height based on the aspect ratio */
+    max-width: 1440px; /* Set a maximum width if the screen is very large */
+    max-height: calc(65vw * 1285 / 1920); /* Maintain the original aspect ratio */
+    aspect-ratio: 1920 / 1285; /* Enforce the original aspect ratio */
+    overflow: hidden;
+    background: none;
+    transition: transform 0.3s ease;
 }
 
 .step-image {
@@ -25,8 +26,8 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Ensures the image fully fits within the container */
-    display: none; /* Hide all images initially */
+    object-fit: contain;
+    display: none;
 }
 
 /* Show only the first step initially */
@@ -34,56 +35,18 @@ body, html {
     display: block;
 }
 
-/* Progress container positioned within the image container */
-.progress-container {
-    position: absolute;
-    bottom: 30px; /* Position it slightly above the bottom edge of the image */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center align the indicators */
-    width: 90%; /* Set specific width to control the layout */
-    gap: 11px; /* Increased gap between each mini bar */
-}
-
-/* Step indicators styled as mini horizontal bars */
-.step-indicator {
-    width: 20px;  /* Set width for mini bars */
-    height: 6px; /* Short height for bar-like appearance */
-    background-color: lightgray;
-    border-radius: 3px; /* Rounded corners for a smoother look */
-    cursor: pointer;
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-}
-
-/* Filled step indicators */
-.step-indicator.filled {
-    background-color: blue;
-}
-
-/* Hover effect for mini bars */
-.step-indicator:hover {
-    transform: scale(1.2); /* Slightly increase the size on hover */
-    background-color: #5b9bd5; /* Change to a different shade of blue on hover */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Add a shadow for a 'lifted' effect */
-}
-
-/* Pulsing circle for the active step */
 .pulsing-circle {
     position: absolute;
-    width: 12px; /* Adjusted smaller width */
-    height: 12px; /* Adjusted smaller height */
+    width: 20px;
+    height: 20px;
     background-color: blue;
     border-radius: 50%;
     cursor: pointer;
     animation: pulse 1.5s infinite ease-in-out;
     z-index: 2;
-    transition: top 0.3s ease, left 0.3s ease; /* Smooth transition for movement */
+    transition: top 0.3s ease, left 0.3s ease;
 }
 
-/* Keyframes for pulsing animation */
 @keyframes pulse {
     0% {
         transform: scale(1);
@@ -97,4 +60,34 @@ body, html {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+.progress-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.step-indicator {
+    width: 20px;
+    height: 6px;
+    background-color: lightgray;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step-indicator.filled {
+    background-color: blue;
+}
+
+.step-indicator:hover {
+    transform: scale(1.2);
+    background-color: #5b9bd5;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
